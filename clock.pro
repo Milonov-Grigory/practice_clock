@@ -9,5 +9,7 @@ INCLUDEPATH += .
 QT += widgets
 
 # Input
-HEADERS += clock_widget.h
-SOURCES += clock.cpp clock_widget.cpp
+HEADERS += clock_widget.h clockform.h
+SOURCES += clock.cpp clock_widget.cpp clockform.cpp
+
+FORMS += clockform.ui
