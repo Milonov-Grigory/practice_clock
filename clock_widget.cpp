@@ -23,13 +23,16 @@ void Clock::timerEvent(QTimerEvent*)
 	_seconds = t.second();
 
 	update();
-    //std::cout << "Tick" << std::endl;
 }
-void drawKek(QPainter& p)
+void Clock::drawHand(int value, Qt::GlobalColor color, QPainter* p, int size)
 {
-    p.drawText(0,0,QString("kek"));
+    p->save();
+    p->rotate(value);
+    p->scale(5,12);
+    p->setPen(color);
+    p->drawLine(0,0,0,size);
+    p->restore();
 }
-
 void Clock::paintEvent(QPaintEvent*)
 {
 	QPainter p(this);
@@ -37,26 +40,11 @@ void Clock::paintEvent(QPaintEvent*)
 	p.translate(center);
 
 	// seconds
-	p.save();
-    p.rotate((_seconds - 30) * 6);
-    p.scale(5,12);
-    p.setPen(Qt::red);
-    p.drawLine(0,0,0,9);
-	p.restore();
+    drawHand((_seconds - 30) * 6, Qt::red, &p, 9);
     // minutes
-    p.save();
-    p.rotate((_minutes - 30) * 6);
-    p.scale(5,12);
-    p.setPen(Qt::blue);
-    p.drawLine(0,0,0,8);
-    p.restore();
+    drawHand((_minutes - 30) * 6, Qt::blue, &p, 8);
     //hours
-    p.save();
-    p.rotate(_hours * 6);
-    p.scale(5,12);
-    p.setPen(Qt::yellow);
-    p.drawLine(0,0, 0,7);
-    p.restore();
+    drawHand(_hours * 6, Qt::yellow, &p, 7);
 
     //lines
     for (int i = 0; i < 360; i+=6)
