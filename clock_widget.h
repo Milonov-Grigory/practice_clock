@@ -11,6 +11,8 @@ class Clock : public QWidget
 
 		void paintEvent(QPaintEvent*);
 		void timerEvent(QTimerEvent*);
+        void drawHand(int value, Qt::GlobalColor color,
+                      QPainter* p, int size);
 
 	private:
 		int _hours; 
