@@ -98,9 +98,11 @@ void Clock::paintEvent(QPaintEvent*)
     p.setFont(fontTime);
 
 
-    p.drawText(QPoint(-40,0), QString::number(_hours));
-    p.drawText(QPoint(-4,0), QString(":"));
-    p.drawText(QPoint(10,0), QString::number(_minutes));
+    p.drawText(QPoint(-55,0), QString::number(_hours));
+    p.drawText(QPoint(-25,0), QString(":"));
+    p.drawText(QPoint(-15,0), QString::number(_minutes));
+    p.drawText(QPoint(15,0), QString(":"));
+    p.drawText(QPoint(25,0), QString::number(_seconds));
 
     p.setFont(fontDial);
 
@@ -108,7 +110,7 @@ void Clock::paintEvent(QPaintEvent*)
     int radius = 120;
     for (int i = 0; i < 12; ++i)
     {
-            //if ((i+1)%3 == 0)
+            if ((i+1)%3 == 0)
             p.drawText((int)radius*cos(phi)-10,(int)radius*sin(phi) - 10, 20, 20, Qt::AlignCenter, QString::number(i+1));
         phi += M_PI/6;
         phi = normalizeAngle(phi);
@@ -116,12 +118,13 @@ void Clock::paintEvent(QPaintEvent*)
 
     phi = 0;
     radius = 110;
-    for (int i = 0; i < 12; ++i)
+    for (int i = 0; i < 120; i++)
     {
-
-
+        if (i%10 == 0)
         p.drawLine(radius*cos(phi)*0.9,radius*sin(phi)*0.9, radius*cos(phi),radius*sin(phi));
-        phi += M_PI/6;
+        else
+        p.drawLine(radius*cos(phi)*0.95,radius*sin(phi)*0.95, radius*cos(phi),radius*sin(phi));
+        phi += M_PI/60;
     }
 
     /* Не очень красиво получилось - требуется другое решение
