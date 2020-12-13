@@ -124,7 +124,7 @@ void Clock::paintEvent(QPaintEvent*)
         p.drawLine(radius*cos(phi)*0.9,radius*sin(phi)*0.9, radius*cos(phi),radius*sin(phi));
         else
         p.drawLine(radius*cos(phi)*0.95,radius*sin(phi)*0.95, radius*cos(phi),radius*sin(phi));
-        phi += M_PI/60;
+        phi += M_PI/30;
     }
 
     /* Не очень красиво получилось - требуется другое решение
